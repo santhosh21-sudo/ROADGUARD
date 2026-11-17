@@ -22,26 +22,23 @@ def render_my_reports_page():
 
     # Header Banner
     st.markdown(
-        f"""
-        <div class="rg-card" style="border-left: 5px solid {THEME_COLORS['primary_blue']};">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-                <div>
-                    <h2 style="margin:0; color:#1E3A8A;">📋 My Submitted Road Reports</h2>
-                    <p style="margin:4px 0 0 0; color:#475569;">
-                        Track verification progress, municipal work order dispatches, community upvotes, and resolution statuses for all your reports.
-                    </p>
-                </div>
-                <div>
-                    <span class="rg-badge" style="background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; font-size:13px; padding:6px 14px;">
-                        👤 {user.get('full_name', 'Reporter')} ({user.get('role', 'reporter').upper()})
-                    </span>
-                </div>
-            </div>
-        </div>
-        """,
+        f"""<div class="rg-card" style="border-left: 5px solid {THEME_COLORS['primary_blue']};">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+<div>
+<h2 style="margin:0; color:#1E3A8A;">📋 My Submitted Road Reports</h2>
+<p style="margin:4px 0 0 0; color:#475569;">
+Track verification progress, municipal work order dispatches, community upvotes, and resolution statuses for all your reports.
+</p>
+</div>
+<div>
+<span class="rg-badge" style="background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; font-size:13px; padding:6px 14px;">
+👤 {user.get('full_name', 'Reporter')} ({user.get('role', 'reporter').upper()})
+</span>
+</div>
+</div>
+</div>""",
         unsafe_allow_html=True
     )
-
     # If user is in Viewer role and has 0 reports, provide helpful role context
     if user.get("role") == "viewer" and not reports:
         st.info(
@@ -101,16 +98,13 @@ def render_my_reports_page():
 
     if not filtered_reports:
         st.markdown(
-            """
-            <div class="rg-card" style="text-align:center; padding:36px; color:#64748B;">
-                <div style="font-size:36px; margin-bottom:8px;">📝</div>
-                <h4 style="margin:0 0 6px 0; color:#334155;">No reports match the selected filter</h4>
-                <p style="font-size:13px; margin:0;">File a new road hazard report to begin earning Safety Karma and tracking roadway repairs.</p>
-            </div>
-            """,
+            """<div class="rg-card" style="text-align:center; padding:36px; color:#64748B;">
+<div style="font-size:36px; margin-bottom:8px;">📝</div>
+<h4 style="margin:0 0 6px 0; color:#334155;">No reports match the selected filter</h4>
+<p style="font-size:13px; margin:0;">File a new road hazard report to begin earning Safety Karma and tracking roadway repairs.</p>
+</div>""",
             unsafe_allow_html=True
         )
-        return
 
     # Render Report Dossiers with Visual Lifecycle Progression
     for r in filtered_reports:
@@ -139,12 +133,7 @@ def render_single_report_dossier(r: Dict[str, Any]):
         if is_current:
             icon_step = "▶"
 
-        pipeline_html += f"""
-        <div style='display:inline-flex; align-items:center; gap:4px; background:{bg_col}; color:{txt_col}; padding:3px 10px; border-radius:14px; font-size:11px; font-weight:700; border:2px solid {border_col};'>
-            <span>{icon_step}</span>
-            <span>{step_name}</span>
-        </div>
-        """
+        pipeline_html += f"<div style='display:inline-flex; align-items:center; gap:4px; background:{bg_col}; color:{txt_col}; padding:3px 10px; border-radius:14px; font-size:11px; font-weight:700; border:2px solid {border_col};'><span>{icon_step}</span><span>{step_name}</span></div>"
         if idx < len(steps) - 1:
             arrow_color = "#059669" if idx < current_idx else "#CBD5E1"
             pipeline_html += f"<span style='color:{arrow_color}; font-weight:800; font-size:12px;'>➔</span>"
@@ -154,38 +143,36 @@ def render_single_report_dossier(r: Dict[str, Any]):
 
     with col_info:
         st.markdown(
-            f"""
-            <div class="rg-card" style="border-left: 5px solid {sev_color}; margin-bottom:14px;">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-                    <div>
-                        <span class="rg-badge badge-{sev.lower()}">{cat_meta['icon']} {sev.upper()} SEVERITY</span>
-                        <span class="rg-badge" style="background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE;">
-                            {status_meta['icon']} {status}
-                        </span>
-                    </div>
-                    <span style="font-size:11px; color:#64748B;">{time_ago(r.get('created_at', ''))}</span>
-                </div>
-                <h3 style="margin:10px 0 4px 0; color:#0F172A; font-size:17px;">
-                    #{r['id']} {r['title']}
-                </h3>
-                <div style="font-size:12px; color:#475569; margin-bottom:6px;">
-                    📍 <b>{r.get('address', 'Location not specified')}</b> ({r.get('city', '')})<br>
-                    🌐 Coordinates: <code>{r['latitude']:.4f}, {r['longitude']:.4f}</code>
-                </div>
-                {pipeline_html}
-                <div style="background:#F8FAFC; border-radius:6px; padding:10px; font-size:13px; color:#334155; margin-bottom:8px;">
-                    {r.get('description', 'No additional details provided.')}
-                </div>
-                <div style="background:#ECFDF5; border:1px solid #A7F3D0; padding:6px 10px; border-radius:6px; font-size:12px; color:#065F46; margin-bottom:6px;">
-                    <b>💡 Recommended Driver Action:</b> {r.get('suggested_action', 'Proceed with caution.')}
-                </div>
-                {f"<div style='background:#EFF6FF; border:1px solid #BFDBFE; padding:6px 10px; border-radius:6px; font-size:12px; color:#1E40AF; margin-bottom:6px;'><b>🚜 Work Order Dispatch:</b> Code <code>{r['work_order_id']}</code> — {r.get('resolution_notes', '')}</div>" if r.get('work_order_id') else ""}
-                <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#64748B; margin-top:8px;">
-                    <span>Safety Reward: <b>+25 Karma Points</b></span>
-                    <span>👍 <b>{r.get('upvotes', 0)} Community Confirmations</b></span>
-                </div>
-            </div>
-            """,
+            f"""<div class="rg-card" style="border-left: 5px solid {sev_color}; margin-bottom:14px;">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+<div>
+<span class="rg-badge badge-{sev.lower()}">{cat_meta['icon']} {sev.upper()} SEVERITY</span>
+<span class="rg-badge" style="background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE;">
+{status_meta['icon']} {status}
+</span>
+</div>
+<span style="font-size:11px; color:#64748B;">{time_ago(r.get('created_at', ''))}</span>
+</div>
+<h3 style="margin:10px 0 4px 0; color:#0F172A; font-size:17px;">
+#{r['id']} {r['title']}
+</h3>
+<div style="font-size:12px; color:#475569; margin-bottom:6px;">
+📍 <b>{r.get('address', 'Location not specified')}</b> ({r.get('city', '')})<br>
+🌐 Coordinates: <code>{r['latitude']:.4f}, {r['longitude']:.4f}</code>
+</div>
+{pipeline_html}
+<div style="background:#F8FAFC; border-radius:6px; padding:10px; font-size:13px; color:#334155; margin-bottom:8px;">
+{r.get('description', 'No additional details provided.')}
+</div>
+<div style="background:#ECFDF5; border:1px solid #A7F3D0; padding:6px 10px; border-radius:6px; font-size:12px; color:#065F46; margin-bottom:6px;">
+<b>💡 Recommended Driver Action:</b> {r.get('suggested_action', 'Proceed with caution.')}
+</div>
+{f"<div style='background:#EFF6FF; border:1px solid #BFDBFE; padding:6px 10px; border-radius:6px; font-size:12px; color:#1E40AF; margin-bottom:6px;'><b>🚜 Work Order Dispatch:</b> Code <code>{r['work_order_id']}</code> — {r.get('resolution_notes', '')}</div>" if r.get('work_order_id') else ""}
+<div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#64748B; margin-top:8px;">
+<span>Safety Reward: <b>+25 Karma Points</b></span>
+<span>👍 <b>{r.get('upvotes', 0)} Community Confirmations</b></span>
+</div>
+</div>""",
             unsafe_allow_html=True
         )
 
@@ -195,10 +182,8 @@ def render_single_report_dossier(r: Dict[str, Any]):
             st.image(photo_url, caption=f"Evidence Photo: #{r['id']} {r['title'][:25]}", use_container_width=True)
         else:
             st.markdown(
-                """
-                <div style="background:#F1F5F9; border:1px dashed #CBD5E1; border-radius:8px; height:180px; display:flex; align-items:center; justify-content:center; text-align:center; color:#64748B; font-size:12px; padding:14px;">
-                    📷 Photo evidence on file.
-                </div>
-                """,
+                """<div style="background:#F1F5F9; border:1px dashed #CBD5E1; border-radius:8px; height:180px; display:flex; align-items:center; justify-content:center; text-align:center; color:#64748B; font-size:12px; padding:14px;">
+📷 Photo evidence on file.
+</div>""",
                 unsafe_allow_html=True
             )

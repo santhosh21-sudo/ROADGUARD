@@ -225,246 +225,247 @@ def apply_custom_theme():
     Injects custom CSS adhering strictly to the requested light theme:
     Modern, professional palette with blue, white, and green.
     """
-    custom_css = f"""
-    <style>
-    /* Google Fonts Import */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+custom_css = f"""
+<style>
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-    html, body, [class*="css"] {{
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        color: {THEME_COLORS["text_main"]};
-    }}
+html, body, [class*="css"] {{
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+color: {THEME_COLORS["text_main"]};
+}}
 
-    /* Top Header & App Shell */
-    .stApp {{
-        background-color: {THEME_COLORS["background_light"]};
-    }}
+/* Top Header & App Shell */
+.stApp {{
+background-color: {THEME_COLORS["background_light"]};
+}}
 
-    /* Primary Container Card */
-    .rg-card {{
-        background-color: {THEME_COLORS["surface_white"]};
-        border-radius: 12px;
-        padding: 20px 24px;
-        border: 1px solid {THEME_COLORS["card_border"]};
-        box-shadow: 0 2px 4px -1px rgba(15, 23, 42, 0.04), 0 4px 6px -1px rgba(15, 23, 42, 0.02);
-        margin-bottom: 16px;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }}
-    .rg-card:hover {{
-        box-shadow: 0 6px 12px -2px rgba(15, 23, 42, 0.08);
-    }}
+/* Primary Container Card */
+.rg-card {{
+background-color: {THEME_COLORS["surface_white"]};
+border-radius: 12px;
+padding: 20px 24px;
+border: 1px solid {THEME_COLORS["card_border"]};
+box-shadow: 0 2px 4px -1px rgba(15, 23, 42, 0.04), 0 4px 6px -1px rgba(15, 23, 42, 0.02);
+margin-bottom: 16px;
+transition: transform 0.15s ease, box-shadow 0.15s ease;
+}}
+.rg-card:hover {{
+box-shadow: 0 6px 12px -2px rgba(15, 23, 42, 0.08);
+}}
 
-    /* Stat KPI Card */
-    .rg-stat-box {{
-        background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
-        border-radius: 12px;
-        padding: 16px 20px;
-        border: 1px solid {THEME_COLORS["card_border"]};
-        border-left: 4px solid {THEME_COLORS["primary_blue"]};
-        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }}
-    .rg-stat-box.green {{
-        border-left-color: {THEME_COLORS["accent_green"]};
-    }}
-    .rg-stat-box.red {{
-        border-left-color: {THEME_COLORS["severity_critical"]};
-    }}
-    .rg-stat-box.amber {{
-        border-left-color: {THEME_COLORS["severity_medium"]};
-    }}
+/* Stat KPI Card */
+.rg-stat-box {{
+background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+border-radius: 12px;
+padding: 16px 20px;
+border: 1px solid {THEME_COLORS["card_border"]};
+border-left: 4px solid {THEME_COLORS["primary_blue"]};
+box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}}
+.rg-stat-box.green {{
+border-left-color: {THEME_COLORS["accent_green"]};
+}}
+.rg-stat-box.red {{
+border-left-color: {THEME_COLORS["severity_critical"]};
+}}
+.rg-stat-box.amber {{
+border-left-color: {THEME_COLORS["severity_medium"]};
+}}
 
-    .rg-stat-value {{
-        font-size: 28px;
-        font-weight: 700;
-        color: {THEME_COLORS["text_main"]};
-        line-height: 1.1;
-    }}
-    .rg-stat-label {{
-        font-size: 13px;
-        font-weight: 500;
-        color: {THEME_COLORS["text_muted"]};
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-top: 4px;
-    }}
+.rg-stat-value {{
+font-size: 28px;
+font-weight: 700;
+color: {THEME_COLORS["text_main"]};
+line-height: 1.1;
+}}
+.rg-stat-label {{
+font-size: 13px;
+font-weight: 500;
+color: {THEME_COLORS["text_muted"]};
+text-transform: uppercase;
+letter-spacing: 0.5px;
+margin-top: 4px;
+}}
 
-    /* Badges */
-    .rg-badge {{
-        display: inline-block;
-        padding: 4px 10px;
-        border-radius: 9999px;
-        font-size: 12px;
-        font-weight: 600;
-        text-align: center;
-        margin-right: 6px;
-    }}
-    .badge-critical {{
-        background-color: #FEE2E2;
-        color: #991B1B;
-        border: 1px solid #FCA5A5;
-    }}
-    .badge-high {{
-        background-color: #FFEDD5;
-        color: #9A3412;
-        border: 1px solid #FDBA74;
-    }}
-    .badge-medium {{
-        background-color: #FEF3C7;
-        color: #92400E;
-        border: 1px solid #FCD34D;
-    }}
-    .badge-low {{
-        background-color: #D1FAE5;
-        color: #065F46;
-        border: 1px solid #6EE7B7;
-    }}
-    .badge-status-resolved {{
-        background-color: #ECFDF5;
-        color: #047857;
-        border: 1px solid #A7F3D0;
-    }}
-    .badge-status-active {{
-        background-color: #EFF6FF;
-        color: #1D4ED8;
-        border: 1px solid #BFDBFE;
-    }}
+/* Badges */
+.rg-badge {{
+display: inline-block;
+padding: 4px 10px;
+border-radius: 9999px;
+font-size: 12px;
+font-weight: 600;
+text-align: center;
+margin-right: 6px;
+}}
+.badge-critical {{
+background-color: #FEE2E2;
+color: #991B1B;
+border: 1px solid #FCA5A5;
+}}
+.badge-high {{
+background-color: #FFEDD5;
+color: #9A3412;
+border: 1px solid #FDBA74;
+}}
+.badge-medium {{
+background-color: #FEF3C7;
+color: #92400E;
+border: 1px solid #FCD34D;
+}}
+.badge-low {{
+background-color: #D1FAE5;
+color: #065F46;
+border: 1px solid #6EE7B7;
+}}
+.badge-status-resolved {{
+background-color: #ECFDF5;
+color: #047857;
+border: 1px solid #A7F3D0;
+}}
+.badge-status-active {{
+background-color: #EFF6FF;
+color: #1D4ED8;
+border: 1px solid #BFDBFE;
+}}
 
-    /* App Header Banner */
-    .rg-header {{
-        background: linear-gradient(135deg, #1E40AF 0%, #1E3A8A 60%, #065F46 100%);
-        border-radius: 14px;
-        padding: 24px 30px;
-        color: white;
-        margin-bottom: 24px;
-        box-shadow: 0 10px 15px -3px rgba(30, 64, 175, 0.2);
-    }}
-    .rg-header h1 {{
-        color: white;
-        font-size: 32px;
-        font-weight: 800;
-        letter-spacing: -0.5px;
-        margin: 0;
-    }}
-    .rg-header p {{
-        color: #E2E8F0;
-        font-size: 15px;
-        margin: 6px 0 0 0;
-        font-weight: 400;
-    }}
+/* App Header Banner */
+.rg-header {{
+background: linear-gradient(135deg, #1E40AF 0%, #1E3A8A 60%, #065F46 100%);
+border-radius: 14px;
+padding: 24px 30px;
+color: white;
+margin-bottom: 24px;
+box-shadow: 0 10px 15px -3px rgba(30, 64, 175, 0.2);
+}}
+.rg-header h1 {{
+color: white;
+font-size: 32px;
+font-weight: 800;
+letter-spacing: -0.5px;
+margin: 0;
+}}
+.rg-header p {{
+color: #E2E8F0;
+font-size: 15px;
+margin: 6px 0 0 0;
+font-weight: 400;
+}}
 
-    /* Buttons styling */
-    div.stButton > button:first-child {{
-        background-color: {THEME_COLORS["primary_blue"]};
-        color: white;
-        font-weight: 600;
-        border-radius: 8px;
-        border: none;
-        padding: 8px 18px;
-        transition: all 0.2s ease;
-    }}
-    div.stButton > button:first-child:hover {{
-        background-color: #1D4ED8;
-        box-shadow: 0 4px 8px rgba(37, 99, 235, 0.25);
-    }}
+/* Buttons styling */
+div.stButton > button:first-child {{
+background-color: {THEME_COLORS["primary_blue"]};
+color: white;
+font-weight: 600;
+border-radius: 8px;
+border: none;
+padding: 8px 18px;
+transition: all 0.2s ease;
+}}
+div.stButton > button:first-child:hover {{
+background-color: #1D4ED8;
+box-shadow: 0 4px 8px rgba(37, 99, 235, 0.25);
+}}
 
-    /* Green action buttons */
-    .green-btn button {{
-        background-color: {THEME_COLORS["accent_green"]} !important;
-        color: white !important;
-    }}
-    .green-btn button:hover {{
-        background-color: #047857 !important;
-    }}
+/* Green action buttons */
+.green-btn button {{
+background-color: {THEME_COLORS["accent_green"]} !important;
+color: white !important;
+}}
+.green-btn button:hover {{
+background-color: #047857 !important;
+}}
 
-    /* Radar Pulse Box */
-    .rg-radar-alert {{
-        border-radius: 10px;
-        padding: 16px;
-        margin-bottom: 12px;
-        display: flex;
-        align-items: center;
-        gap: 14px;
-    }}
-    .radar-crit {{
-        background-color: #FEF2F2;
-        border: 2px solid #DC2626;
-        animation: pulseCrit 1.8s infinite;
-    }}
-    .radar-warn {{
-        background-color: #FFFBEB;
-        border: 2px solid #F59E0B;
-    }}
-    .radar-info {{
-        background-color: #F0FDF4;
-        border: 2px solid #10B981;
-    }}
+/* Radar Pulse Box */
+.rg-radar-alert {{
+border-radius: 10px;
+padding: 16px;
+margin-bottom: 12px;
+display: flex;
+align-items: center;
+gap: 14px;
+}}
+.radar-crit {{
+background-color: #FEF2F2;
+border: 2px solid #DC2626;
+animation: pulseCrit 1.8s infinite;
+}}
+.radar-warn {{
+background-color: #FFFBEB;
+border: 2px solid #F59E0B;
+}}
+.radar-info {{
+background-color: #F0FDF4;
+border: 2px solid #10B981;
+}}
 
-    @keyframes pulseCrit {{
-        0% {{ box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }}
-        70% {{ box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }}
-        100% {{ box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }}
-    }}
+@keyframes pulseCrit {{
+0% {{ box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }}
+70% {{ box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }}
+100% {{ box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }}
+}}
 
-    /* User Profile Pill in Sidebar */
-    .user-profile-pill {{
-        background: #F1F5F9;
-        border: 1px solid #CBD5E1;
-        border-radius: 10px;
-        padding: 12px 14px;
-        margin-bottom: 16px;
-    }}
+/* User Profile Pill in Sidebar */
+.user-profile-pill {{
+background: #F1F5F9;
+border: 1px solid #CBD5E1;
+border-radius: 10px;
+padding: 12px 14px;
+margin-bottom: 16px;
+}}
 
-    /* Mobile-Friendly Responsive Layout */
-    @media (max-width: 768px) {{
-        .rg-card {{
-            padding: 14px 16px !important;
-            margin-bottom: 12px !important;
-            border-radius: 10px !important;
-        }}
-        .rg-header {{
-            padding: 16px 18px !important;
-            margin-bottom: 16px !important;
-            border-radius: 10px !important;
-        }}
-        .rg-header h1 {{
-            font-size: 22px !important;
-        }}
-        .rg-header p {{
-            font-size: 13px !important;
-        }}
-        .rg-stat-box {{
-            padding: 12px 14px !important;
-            margin-bottom: 8px !important;
-        }}
-        .rg-stat-value {{
-            font-size: 22px !important;
-        }}
-        div[data-testid="column"] {{
-            width: 100% !important;
-            flex: 1 1 100% !important;
-            min-width: 100% !important;
-            margin-bottom: 10px !important;
-        }}
-        div.stButton > button {{
-            width: 100% !important;
-            font-size: 15px !important;
-            min-height: 48px !important;
-            border-radius: 8px !important;
-        }}
-        input, select, textarea {{
-            font-size: 16px !important;
-        }}
-        .rg-badge {{
-            font-size: 11px !important;
-            padding: 3px 8px !important;
-            margin-bottom: 4px !important;
-        }}
-    }}
+/* Mobile-Friendly Responsive Layout */
+@media (max-width: 768px) {{
+.rg-card {{
+padding: 14px 16px !important;
+margin-bottom: 12px !important;
+border-radius: 10px !important;
+}}
+.rg-header {{
+padding: 16px 18px !important;
+margin-bottom: 16px !important;
+border-radius: 10px !important;
+}}
+.rg-header h1 {{
+font-size: 22px !important;
+}}
+.rg-header p {{
+font-size: 13px !important;
+}}
+.rg-stat-box {{
+padding: 12px 14px !important;
+margin-bottom: 8px !important;
+}}
+.rg-stat-value {{
+font-size: 22px !important;
+}}
+div[data-testid="column"] {{
+width: 100% !important;
+flex: 1 1 100% !important;
+min-width: 100% !important;
+margin-bottom: 10px !important;
+}}
+div.stButton > button {{
+width: 100% !important;
+font-size: 15px !important;
+min-height: 48px !important;
+border-radius: 8px !important;
+}}
+input, select, textarea {{
+font-size: 16px !important;
+}}
+.rg-badge {{
+font-size: 11px !important;
+padding: 3px 8px !important;
+margin-bottom: 4px !important;
+}}
+}}
 
-    /* Hide default streamlit decorations */
-    #MainMenu {{visibility: hidden;}}
-    footer {{visibility: hidden;}}
-    header {{visibility: hidden;}}
-    </style>
-    """
-    st.markdown(custom_css, unsafe_allow_html=True)
+/* Hide default streamlit decorations */
+#MainMenu {{visibility: hidden;}}
+footer {{visibility: hidden;}}
+header {{visibility: hidden;}}
+</style>
+"""
+    clean_css = "\n".join(line.strip() for line in custom_css.splitlines() if line.strip())
+    st.markdown(clean_css, unsafe_allow_html=True)

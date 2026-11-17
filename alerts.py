@@ -58,14 +58,12 @@ def render_alerts_page():
     user = get_current_user()
 
     st.markdown(
-        """
-        <div class="rg-card" style="border-left: 5px solid #DC2626;">
-            <h2 style="margin:0; color:#1E3A8A;">🚨 Driver Mode & Proximity Radar System</h2>
-            <p style="margin:4px 0 0 0; color:#475569;">
-                Active collision avoidance and tactical hazard radar. Emits dynamic audio/visual alerts as your vehicle approaches road hazards.
-            </p>
-        </div>
-        """,
+        """<div class="rg-card" style="border-left: 5px solid #DC2626;">
+<h2 style="margin:0; color:#1E3A8A;">🚨 Driver Mode & Proximity Radar System</h2>
+<p style="margin:4px 0 0 0; color:#475569;">
+Active collision avoidance and tactical hazard radar. Emits dynamic audio/visual alerts as your vehicle approaches road hazards.
+</p>
+</div>""",
         unsafe_allow_html=True
     )
 
@@ -138,15 +136,13 @@ def render_driver_radar(user: Dict[str, Any]):
 
         # Top Radar Status Strip
         if crit_count > 0:
-            radar_status_html = f"""
-            <div class="rg-radar-alert radar-crit">
-                <div style="font-size:36px;">🚨</div>
-                <div>
-                    <div style="font-weight:800; font-size:18px; color:#991B1B;">CRITICAL HAZARD PROXIMITY ALERT!</div>
-                    <div style="font-size:13px; color:#B91C1C;">{crit_count} imminent hazard(s) within immediate braking distance (&lt;350m).</div>
-                </div>
-            </div>
-            """
+            radar_status_html = f"""<div class="rg-radar-alert radar-crit">
+<div style="font-size:36px;">🚨</div>
+<div>
+<div style="font-weight:800; font-size:18px; color:#991B1B;">CRITICAL HAZARD PROXIMITY ALERT!</div>
+<div style="font-size:13px; color:#B91C1C;">{crit_count} imminent hazard(s) within immediate braking distance (&lt;350m).</div>
+</div>
+</div>"""
             st.markdown(radar_status_html, unsafe_allow_html=True)
             if enable_audio:
                 # Embed HTML5 Web Audio API beep chime for realistic driver alert
@@ -170,27 +166,23 @@ def render_driver_radar(user: Dict[str, Any]):
                 """, height=0)
 
         elif warn_count > 0:
-            radar_status_html = f"""
-            <div class="rg-radar-alert radar-warn">
-                <div style="font-size:32px;">⚠️</div>
-                <div>
-                    <div style="font-weight:700; font-size:16px; color:#92400E;">ROADWAY CAUTION RADAR</div>
-                    <div style="font-size:13px; color:#B45309;">{warn_count} active hazard(s) ahead within 800m. Maintain buffer distance.</div>
-                </div>
-            </div>
-            """
+            radar_status_html = f"""<div class="rg-radar-alert radar-warn">
+<div style="font-size:32px;">⚠️</div>
+<div>
+<div style="font-weight:700; font-size:16px; color:#92400E;">ROADWAY CAUTION RADAR</div>
+<div style="font-size:13px; color:#B45309;">{warn_count} active hazard(s) ahead within 800m. Maintain buffer distance.</div>
+</div>
+</div>"""
             st.markdown(radar_status_html, unsafe_allow_html=True)
 
         else:
-            radar_status_html = f"""
-            <div class="rg-radar-alert radar-info">
-                <div style="font-size:32px;">🟢</div>
-                <div>
-                    <div style="font-weight:700; font-size:16px; color:#065F46;">ROADWAY CLEAR AHEAD</div>
-                    <div style="font-size:13px; color:#047857;">No immediate threats in your vehicle's safety envelope. Cruise safely.</div>
-                </div>
-            </div>
-            """
+            radar_status_html = f"""<div class="rg-radar-alert radar-info">
+<div style="font-size:32px;">🟢</div>
+<div>
+<div style="font-weight:700; font-size:16px; color:#065F46;">ROADWAY CLEAR AHEAD</div>
+<div style="font-size:13px; color:#047857;">No immediate threats in your vehicle's safety envelope. Cruise safely.</div>
+</div>
+</div>"""
             st.markdown(radar_status_html, unsafe_allow_html=True)
 
         # Immediate Critical Hazards
@@ -198,20 +190,18 @@ def render_driver_radar(user: Dict[str, Any]):
             st.markdown("##### 🚨 Critical Threats Ahead (< 350m):")
             for h in scan_results["critical"]:
                 st.markdown(
-                    f"""
-                    <div style="background:#FFF1F2; border:1px solid #FDA4AF; border-radius:10px; padding:12px; margin-bottom:10px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <span style="font-weight:800; color:#BE123C; font-size:15px;">{h['title']}</span>
-                            <span style="font-weight:800; background:#E11D48; color:white; padding:3px 8px; border-radius:6px; font-size:12px;">
-                                📍 {h['current_dist_m']} METERS AHEAD
-                            </span>
-                        </div>
-                        <div style="margin:4px 0; font-size:13px; color:#334155;">📍 {h.get('address', '')}</div>
-                        <div style="background:#FFE4E6; border-left:3px solid #E11D48; padding:6px 10px; border-radius:4px; margin-top:6px; font-size:12px; font-weight:700; color:#9F1239;">
-                            🛑 TACTICAL ADVISORY: {h.get('suggested_action', 'Reduce speed and prepare for lane detour immediately.')}
-                        </div>
-                    </div>
-                    """,
+                    f"""<div style="background:#FFF1F2; border:1px solid #FDA4AF; border-radius:10px; padding:12px; margin-bottom:10px;">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<span style="font-weight:800; color:#BE123C; font-size:15px;">{h['title']}</span>
+<span style="font-weight:800; background:#E11D48; color:white; padding:3px 8px; border-radius:6px; font-size:12px;">
+📍 {h['current_dist_m']} METERS AHEAD
+</span>
+</div>
+<div style="margin:4px 0; font-size:13px; color:#334155;">📍 {h.get('address', '')}</div>
+<div style="background:#FFE4E6; border-left:3px solid #E11D48; padding:6px 10px; border-radius:4px; margin-top:6px; font-size:12px; font-weight:700; color:#9F1239;">
+🛑 TACTICAL ADVISORY: {h.get('suggested_action', 'Reduce speed and prepare for lane detour immediately.')}
+</div>
+</div>""",
                     unsafe_allow_html=True
                 )
 
@@ -220,17 +210,15 @@ def render_driver_radar(user: Dict[str, Any]):
             st.markdown("##### ⚠️ Caution Zone (350m - 800m):")
             for h in scan_results["warning"]:
                 st.markdown(
-                    f"""
-                    <div style="background:#FFFBEB; border:1px solid #FCD34D; border-radius:10px; padding:10px; margin-bottom:8px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <span style="font-weight:700; color:#92400E; font-size:14px;">{h['title']}</span>
-                            <span style="font-weight:700; color:#B45309; font-size:12px;">{h['current_dist_m']}m</span>
-                        </div>
-                        <div style="font-size:12px; color:#78350F; margin-top:2px;">
-                            💡 {h.get('suggested_action', 'Drive cautiously.')}
-                        </div>
-                    </div>
-                    """,
+                    f"""<div style="background:#FFFBEB; border:1px solid #FCD34D; border-radius:10px; padding:10px; margin-bottom:8px;">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<span style="font-weight:700; color:#92400E; font-size:14px;">{h['title']}</span>
+<span style="font-weight:700; color:#B45309; font-size:12px;">{h['current_dist_m']}m</span>
+</div>
+<div style="font-size:12px; color:#78350F; margin-top:2px;">
+💡 {h.get('suggested_action', 'Drive cautiously.')}
+</div>
+</div>""",
                     unsafe_allow_html=True
                 )
 
@@ -265,16 +253,14 @@ def render_sos_broadcaster(user: Dict[str, Any]):
 
     with col2:
         st.markdown(
-            """
-            <div class="rg-card" style="background:#FEF2F2; border:1px solid #F87171;">
-                <h4 style="color:#991B1B; margin:0 0 8px 0;">🛡️ Protocol Guidelines</h4>
-                <ul style="font-size:12px; color:#7F1D1D; padding-left:18px; margin:0;">
-                    <li>Only dispatch for severe safety disruptions or collisions.</li>
-                    <li>Notifies municipal crews, police, and active navigation corridors.</li>
-                    <li>Recorded permanently into public safety audit logs.</li>
-                </ul>
-            </div>
-            """,
+            """<div class="rg-card" style="background:#FEF2F2; border:1px solid #F87171;">
+<h4 style="color:#991B1B; margin:0 0 8px 0;">🛡️ Protocol Guidelines</h4>
+<ul style="font-size:12px; color:#7F1D1D; padding-left:18px; margin:0;">
+<li>Only dispatch for severe safety disruptions or collisions.</li>
+<li>Notifies municipal crews, police, and active navigation corridors.</li>
+<li>Recorded permanently into public safety audit logs.</li>
+</ul>
+</div>""",
             unsafe_allow_html=True
         )
 
@@ -293,15 +279,13 @@ def render_notification_feed(user: Dict[str, Any]):
         bg_col = "#FEF2F2" if a["severity"] == "Critical" else "#F8FAFC"
 
         st.markdown(
-            f"""
-            <div style="background:{bg_col}; border-left:4px solid {border_col}; border-radius:8px; padding:12px 16px; margin-bottom:10px; border-top:1px solid #E2E8F0; border-right:1px solid #E2E8F0; border-bottom:1px solid #E2E8F0;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <span style="font-weight:700; color:#1E3A8A; font-size:14px;">{a['title']}</span>
-                    <span style="font-size:11px; color:#64748B;">{time_ago(a['created_at'])}</span>
-                </div>
-                <div style="font-size:13px; color:#334155; margin-top:4px;">{a['message']}</div>
-                {f"<div style='font-size:11px; color:#475569; margin-top:4px;'>📍 Context: {a.get('address', '')}</div>" if a.get('address') else ""}
-            </div>
-            """,
+            f"""<div style="background:{bg_col}; border-left:4px solid {border_col}; border-radius:8px; padding:12px 16px; margin-bottom:10px; border-top:1px solid #E2E8F0; border-right:1px solid #E2E8F0; border-bottom:1px solid #E2E8F0;">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<span style="font-weight:700; color:#1E3A8A; font-size:14px;">{a['title']}</span>
+<span style="font-size:11px; color:#64748B;">{time_ago(a['created_at'])}</span>
+</div>
+<div style="font-size:13px; color:#334155; margin-top:4px;">{a['message']}</div>
+{f"<div style='font-size:11px; color:#475569; margin-top:4px;'>📍 Context: {a.get('address', '')}</div>" if a.get('address') else ""}
+</div>""",
             unsafe_allow_html=True
         )

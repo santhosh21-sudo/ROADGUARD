@@ -58,35 +58,33 @@ def render_top_banner():
     user_badge_html = ""
     if user:
         role_label = user.get("role", "viewer").upper()
-        user_badge_html = f"""
-        <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.18); padding:6px 14px; border-radius:30px; font-size:12px; font-weight:600; color:#FFFFFF;">
-            <span>{user.get('avatar_icon', '👤')}</span>
-            <span>{user.get('full_name', 'User')}</span>
-            <span style="background:#ECFDF5; color:#065F46; padding:2px 8px; border-radius:9999px; font-size:11px; font-weight:700;">{role_label}</span>
-        </div>
-        """
+        user_badge_html = (
+            f'<div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.18); padding:6px 14px; border-radius:30px; font-size:12px; font-weight:600; color:#FFFFFF;">'
+            f'<span>{user.get("avatar_icon", "👤")}</span>'
+            f'<span>{user.get("full_name", "User")}</span>'
+            f'<span style="background:#ECFDF5; color:#065F46; padding:2px 8px; border-radius:9999px; font-size:11px; font-weight:700;">{role_label}</span>'
+            f'</div>'
+        )
 
     st.markdown(
-        f"""
-        <div class="rg-header">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-                <div>
-                    <h1 style="display:flex; align-items:center; gap:10px; margin:0;">
-                        <span>🛡️</span> {APP_NAME}
-                        <span style="font-size:13px; background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:9999px; font-weight:600;">v{APP_VERSION}</span>
-                    </h1>
-                    <p style="margin:4px 0 0 0; color:#E0E7FF; font-size:14px;">{APP_SUBTITLE} &bull; {APP_SLOGAN}</p>
-                </div>
-                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                    {user_badge_html}
-                    <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.15); padding:6px 14px; border-radius:30px;">
-                        <span style="height:10px; width:10px; background-color:#10B981; border-radius:50%; display:inline-block; box-shadow:0 0 8px #10B981;"></span>
-                        <span style="font-size:13px; font-weight:600; color:#FFFFFF;">Highway Radar Live</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        """,
+        f"""<div class="rg-header">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+<div>
+<h1 style="display:flex; align-items:center; gap:10px; margin:0;">
+<span>🛡️</span> {APP_NAME}
+<span style="font-size:13px; background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:9999px; font-weight:600;">v{APP_VERSION}</span>
+</h1>
+<p style="margin:4px 0 0 0; color:#E0E7FF; font-size:14px;">{APP_SUBTITLE} &bull; {APP_SLOGAN}</p>
+</div>
+<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+{user_badge_html}
+<div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.15); padding:6px 14px; border-radius:30px;">
+<span style="height:10px; width:10px; background-color:#10B981; border-radius:50%; display:inline-block; box-shadow:0 0 8px #10B981;"></span>
+<span style="font-size:13px; font-weight:600; color:#FFFFFF;">Highway Radar Live</span>
+</div>
+</div>
+</div>
+</div>""",
         unsafe_allow_html=True
     )
 
@@ -97,49 +95,41 @@ def render_kpi_cards():
 
     with c1:
         st.markdown(
-            f"""
-            <div class="rg-stat-box">
-                <div class="rg-stat-value" style="color:#1E40AF;">{stats['total_hazards']}</div>
-                <div class="rg-stat-label">Total Hazards Logged</div>
-                <div style="font-size:12px; color:#2563EB; margin-top:4px; font-weight:600;">Database Verified</div>
-            </div>
-            """,
+            f"""<div class="rg-stat-box">
+<div class="rg-stat-value" style="color:#1E40AF;">{stats['total_hazards']}</div>
+<div class="rg-stat-label">Total Hazards Logged</div>
+<div style="font-size:12px; color:#2563EB; margin-top:4px; font-weight:600;">Database Verified</div>
+</div>""",
             unsafe_allow_html=True
         )
 
     with c2:
         st.markdown(
-            f"""
-            <div class="rg-stat-box red">
-                <div class="rg-stat-value" style="color:#DC2626;">{stats['critical_hazards']}</div>
-                <div class="rg-stat-label">Critical Alerts Active</div>
-                <div style="font-size:12px; color:#DC2626; margin-top:4px; font-weight:600;">Immediate Detour Advised</div>
-            </div>
-            """,
+            f"""<div class="rg-stat-box red">
+<div class="rg-stat-value" style="color:#DC2626;">{stats['critical_hazards']}</div>
+<div class="rg-stat-label">Critical Alerts Active</div>
+<div style="font-size:12px; color:#DC2626; margin-top:4px; font-weight:600;">Immediate Detour Advised</div>
+</div>""",
             unsafe_allow_html=True
         )
 
     with c3:
         st.markdown(
-            f"""
-            <div class="rg-stat-box amber">
-                <div class="rg-stat-value" style="color:#D97706;">{stats['active_hazards']}</div>
-                <div class="rg-stat-label">Active Obstructions</div>
-                <div style="font-size:12px; color:#D97706; margin-top:4px; font-weight:600;">Pending or In Repair</div>
-            </div>
-            """,
+            f"""<div class="rg-stat-box amber">
+<div class="rg-stat-value" style="color:#D97706;">{stats['active_hazards']}</div>
+<div class="rg-stat-label">Active Obstructions</div>
+<div style="font-size:12px; color:#D97706; margin-top:4px; font-weight:600;">Pending or In Repair</div>
+</div>""",
             unsafe_allow_html=True
         )
 
     with c4:
         st.markdown(
-            f"""
-            <div class="rg-stat-box green">
-                <div class="rg-stat-value" style="color:#059669;">{stats['resolved_hazards']}</div>
-                <div class="rg-stat-label">Restored Corridors</div>
-                <div style="font-size:12px; color:#059669; margin-top:4px; font-weight:600;">Road Verified Repaired</div>
-            </div>
-            """,
+            f"""<div class="rg-stat-box green">
+<div class="rg-stat-value" style="color:#059669;">{stats['resolved_hazards']}</div>
+<div class="rg-stat-label">Restored Corridors</div>
+<div style="font-size:12px; color:#059669; margin-top:4px; font-weight:600;">Road Verified Repaired</div>
+</div>""",
             unsafe_allow_html=True
         )
 
@@ -153,14 +143,12 @@ def render_authority_portal():
     user = get_current_user()
 
     st.markdown(
-        """
-        <div class="rg-card" style="border-left: 5px solid #1E40AF;">
-            <h2 style="margin:0; color:#1E3A8A;">🏛️ Municipal Road Authority Operations Portal</h2>
-            <p style="margin:4px 0 0 0; color:#475569;">
-                Triage citizen road hazard reports, generate municipal work orders, dispatch public works maintenance crews, and log road restorations.
-            </p>
-        </div>
-        """,
+        """<div class="rg-card" style="border-left: 5px solid #1E40AF;">
+<h2 style="margin:0; color:#1E3A8A;">🏛️ Municipal Road Authority Operations Portal</h2>
+<p style="margin:4px 0 0 0; color:#475569;">
+Triage citizen road hazard reports, generate municipal work orders, dispatch public works maintenance crews, and log road restorations.
+</p>
+</div>""",
         unsafe_allow_html=True
     )
 
@@ -243,14 +231,12 @@ def render_authority_portal():
 def render_analytics_dashboard():
     """Renders roadway infrastructure reliability insights and civic leaderboard."""
     st.markdown(
-        """
-        <div class="rg-card" style="border-left: 5px solid #059669;">
-            <h2 style="margin:0; color:#1E3A8A;">📊 Road Safety Intelligence & Hotspots Analytics</h2>
-            <p style="margin:4px 0 0 0; color:#475569;">
-                Data-driven insights into highway infrastructure reliability, recurring road damage hotspots, and civic leaderboard.
-            </p>
-        </div>
-        """,
+        """<div class="rg-card" style="border-left: 5px solid #059669;">
+<h2 style="margin:0; color:#1E3A8A;">📊 Road Safety Intelligence & Hotspots Analytics</h2>
+<p style="margin:4px 0 0 0; color:#475569;">
+Data-driven insights into highway infrastructure reliability, recurring road damage hotspots, and civic leaderboard.
+</p>
+</div>""",
         unsafe_allow_html=True
     )
 
@@ -329,11 +315,9 @@ def main():
     st.sidebar.markdown(f"## 🛡️ {APP_NAME}")
     role_meta = USER_ROLES.get(user_role, USER_ROLES["viewer"])
     st.sidebar.markdown(
-        f"""
-        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:8px; padding:6px 12px; margin-bottom:12px; font-size:12px; font-weight:700; color:#1E40AF;">
-            {role_meta['icon']} ACTIVE ROLE: {role_meta['label'].upper()}
-        </div>
-        """,
+        f"""<div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:8px; padding:6px 12px; margin-bottom:12px; font-size:12px; font-weight:700; color:#1E40AF;">
+{role_meta['icon']} ACTIVE ROLE: {role_meta['label'].upper()}
+</div>""",
         unsafe_allow_html=True
     )
 

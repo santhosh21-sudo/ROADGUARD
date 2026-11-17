@@ -48,16 +48,14 @@ def render_reporting_page():
     # RBAC Check: Viewers are restricted from submitting reports
     if not can_submit_reports():
         st.markdown(
-            f"""
-            <div class="rg-card" style="border-left: 5px solid #F59E0B;">
-                <h3 style="margin:0; color:#92400E;">🔒 Reporter Role Required</h3>
-                <p style="margin:6px 0 12px 0; color:#475569; font-size:14px;">
-                    You are currently signed in as a <b>Viewer ({user.get('full_name', 'User')})</b>.<br>
-                    Viewers have access to search locations, inspect approved road reports, and check pre-travel route safety.
-                    To file new road hazard reports, upload problem photos, and track fixes, please switch to or register as a <b>Reporter</b>.
-                </p>
-            </div>
-            """,
+            f"""<div class="rg-card" style="border-left: 5px solid #F59E0B;">
+<h3 style="margin:0; color:#92400E;">🔒 Reporter Role Required</h3>
+<p style="margin:6px 0 12px 0; color:#475569; font-size:14px;">
+You are currently signed in as a <b>Viewer ({user.get('full_name', 'User')})</b>.<br>
+Viewers have access to search locations, inspect approved road reports, and check pre-travel route safety.
+To file new road hazard reports, upload problem photos, and track fixes, please switch to or register as a <b>Reporter</b>.
+</p>
+</div>""",
             unsafe_allow_html=True
         )
         if st.button("📢 Switch to Reporter Role (Alice)", type="primary"):
@@ -65,23 +63,21 @@ def render_reporting_page():
         return
 
     st.markdown(
-        f"""
-        <div class="rg-card" style="border-left: 5px solid {THEME_COLORS['primary_blue']};">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-                <div>
-                    <h2 style="margin:0; color:#1E3A8A;">⚠️ Road Hazard Reporting Studio</h2>
-                    <p style="margin:4px 0 0 0; color:#475569;">
-                        Submit live roadway obstructions, upload photo evidence, pinpoint coordinates, and track resolution progress.
-                    </p>
-                </div>
-                <div>
-                    <span class="rg-badge" style="background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; font-size:13px; padding:6px 14px;">
-                        📢 LOGGED IN AS: {user.get('full_name', 'Reporter')}
-                    </span>
-                </div>
-            </div>
-        </div>
-        """,
+        f"""<div class="rg-card" style="border-left: 5px solid {THEME_COLORS['primary_blue']};">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+<div>
+<h2 style="margin:0; color:#1E3A8A;">⚠️ Road Hazard Reporting Studio</h2>
+<p style="margin:4px 0 0 0; color:#475569;">
+Submit live roadway obstructions, upload photo evidence, pinpoint coordinates, and track resolution progress.
+</p>
+</div>
+<div>
+<span class="rg-badge" style="background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; font-size:13px; padding:6px 14px;">
+📢 LOGGED IN AS: {user.get('full_name', 'Reporter')}
+</span>
+</div>
+</div>
+</div>""",
         unsafe_allow_html=True
     )
 
@@ -270,32 +266,30 @@ def render_hazard_reporting_form(user: Dict[str, Any]):
         badge_cls = f"badge-{severity.lower()}"
 
         st.markdown(
-            f"""
-            <div class="rg-card" style="border: 2px solid {sev_info['color']};">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <span class="rg-badge {badge_cls}">{prob_meta['icon']} {severity.upper()} SEVERITY</span>
-                        <span class="rg-badge badge-status-active">📝 REPORTED</span>
-                    </div>
-                    <span style="font-size:11px; color:#64748B;">{incident_date.strftime('%b %d')} at {incident_time.strftime('%H:%M')}</span>
-                </div>
-                <h3 style="margin:12px 0 6px 0; color:#0F172A; font-size:17px;">{report_title}</h3>
-                <div style="font-size:13px; color:#475569; margin-bottom:8px;">
-                    📍 <b>{address}</b> ({selected_city})<br>
-                    🌐 GPS: <code>{latitude:.4f}, {longitude:.4f}</code>
-                </div>
-                <div style="background:#F8FAFC; border-radius:8px; padding:10px; margin-bottom:8px; border-left:3px solid {sev_info['color']}; font-size:13px; color:#334155;">
-                    {description}
-                </div>
-                <div style="background:#ECFDF5; border:1px solid #A7F3D0; border-radius:8px; padding:8px 10px; margin-bottom:8px; font-size:12px; color:#065F46;">
-                    <b>💡 DRIVER ADVISORY:</b> {suggested_action}
-                </div>
-                {"<div style='color:#DC2626; font-size:12px; font-weight:700; margin-bottom:8px;'>⚠️ WARNING: Active Lane Blockage!</div>" if lane_blocked else ""}
-                <div style="font-size:11px; color:#64748B; border-top:1px solid #E2E8F0; padding-top:6px;">
-                    Reported by: <b>{user['full_name']} (📢 Reporter)</b>
-                </div>
-            </div>
-            """,
+            f"""<div class="rg-card" style="border: 2px solid {sev_info['color']};">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<div>
+<span class="rg-badge {badge_cls}">{prob_meta['icon']} {severity.upper()} SEVERITY</span>
+<span class="rg-badge badge-status-active">📝 REPORTED</span>
+</div>
+<span style="font-size:11px; color:#64748B;">{incident_date.strftime('%b %d')} at {incident_time.strftime('%H:%M')}</span>
+</div>
+<h3 style="margin:12px 0 6px 0; color:#0F172A; font-size:17px;">{report_title}</h3>
+<div style="font-size:13px; color:#475569; margin-bottom:8px;">
+📍 <b>{address}</b> ({selected_city})<br>
+🌐 GPS: <code>{latitude:.4f}, {longitude:.4f}</code>
+</div>
+<div style="background:#F8FAFC; border-radius:8px; padding:10px; margin-bottom:8px; border-left:3px solid {sev_info['color']}; font-size:13px; color:#334155;">
+{description}
+</div>
+<div style="background:#ECFDF5; border:1px solid #A7F3D0; border-radius:8px; padding:8px 10px; margin-bottom:8px; font-size:12px; color:#065F46;">
+<b>💡 DRIVER ADVISORY:</b> {suggested_action}
+</div>
+{"<div style='color:#DC2626; font-size:12px; font-weight:700; margin-bottom:8px;'>⚠️ WARNING: Active Lane Blockage!</div>" if lane_blocked else ""}
+<div style="font-size:11px; color:#64748B; border-top:1px solid #E2E8F0; padding-top:6px;">
+Reported by: <b>{user['full_name']} (📢 Reporter)</b>
+</div>
+</div>""",
             unsafe_allow_html=True
         )
 
@@ -406,34 +400,32 @@ def render_user_reports_list(reports, user: Dict[str, Any]):
 
             with col_l:
                 st.markdown(
-                    f"""
-                    <div class="rg-card" style="border-left: 5px solid {sev_color};">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div>
-                                <span class="rg-badge badge-{r['severity'].lower()}">{cat_icon} {r['severity'].upper()}</span>
-                                <span class="rg-badge" style="background:{status_color}22; color:{status_color}; border:1px solid {status_color};">
-                                    {r['status']}
-                                </span>
-                            </div>
-                            <span style="font-size:11px; color:#64748B;">{time_ago(r.get('created_at', ''))}</span>
-                        </div>
-                        <h3 style="margin:10px 0 6px 0; color:#0F172A; font-size:17px;">#{r['id']} - {r['title']}</h3>
-                        <div style="font-size:13px; color:#475569; margin-bottom:8px;">
-                            📍 <b>{r.get('address', '')}</b> ({r.get('city', '')})<br>
-                            🌐 GPS: <code>{r['latitude']:.4f}, {r['longitude']:.4f}</code>
-                        </div>
-                        <div style="background:#F8FAFC; border-radius:6px; padding:8px 12px; margin-bottom:8px; font-size:13px; color:#334155;">
-                            {r.get('description', '')}
-                        </div>
-                        <div style="background:#ECFDF5; border:1px solid #A7F3D0; padding:6px 10px; border-radius:6px; font-size:12px; color:#065F46; margin-bottom:6px;">
-                            <b>💡 Driver Advisory:</b> {r.get('suggested_action', 'Drive cautiously')}
-                        </div>
-                        {f"<div style='background:#EFF6FF; border:1px solid #BFDBFE; padding:6px 10px; border-radius:6px; font-size:12px; color:#1E40AF; margin-bottom:6px;'><b>Resolution Notes:</b> {r['resolution_notes']}</div>" if r.get('resolution_notes') else ""}
-                        <div style="font-size:11px; color:#64748B; margin-top:4px;">
-                            👍 {r['upvotes']} Community Verifications | Lane Blocked: {'Yes' if r.get('lane_blocked') else 'No'}
-                        </div>
-                    </div>
-                    """,
+                    f"""<div class="rg-card" style="border-left: 5px solid {sev_color};">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<div>
+<span class="rg-badge badge-{r['severity'].lower()}">{cat_icon} {r['severity'].upper()}</span>
+<span class="rg-badge" style="background:{status_color}22; color:{status_color}; border:1px solid {status_color};">
+{r['status']}
+</span>
+</div>
+<span style="font-size:11px; color:#64748B;">{time_ago(r.get('created_at', ''))}</span>
+</div>
+<h3 style="margin:10px 0 6px 0; color:#0F172A; font-size:17px;">#{r['id']} - {r['title']}</h3>
+<div style="font-size:13px; color:#475569; margin-bottom:8px;">
+📍 <b>{r.get('address', '')}</b> ({r.get('city', '')})<br>
+🌐 GPS: <code>{r['latitude']:.4f}, {r['longitude']:.4f}</code>
+</div>
+<div style="background:#F8FAFC; border-radius:6px; padding:8px 12px; margin-bottom:8px; font-size:13px; color:#334155;">
+{r.get('description', '')}
+</div>
+<div style="background:#ECFDF5; border:1px solid #A7F3D0; padding:6px 10px; border-radius:6px; font-size:12px; color:#065F46; margin-bottom:6px;">
+<b>💡 Driver Advisory:</b> {r.get('suggested_action', 'Drive cautiously')}
+</div>
+{f"<div style='background:#EFF6FF; border:1px solid #BFDBFE; padding:6px 10px; border-radius:6px; font-size:12px; color:#1E40AF; margin-bottom:6px;'><b>Resolution Notes:</b> {r['resolution_notes']}</div>" if r.get('resolution_notes') else ""}
+<div style="font-size:11px; color:#64748B; margin-top:4px;">
+👍 {r['upvotes']} Community Verifications | Lane Blocked: {'Yes' if r.get('lane_blocked') else 'No'}
+</div>
+</div>""",
                     unsafe_allow_html=True
                 )
 
@@ -443,10 +435,8 @@ def render_user_reports_list(reports, user: Dict[str, Any]):
                     st.image(p_url, caption=f"Evidence Photo: #{r['id']}", use_container_width=True)
                 else:
                     st.markdown(
-                        """
-                        <div style="background:#F1F5F9; border:1px dashed #CBD5E1; border-radius:8px; height:160px; display:flex; align-items:center; justify-content:center; text-align:center; color:#64748B; font-size:12px; padding:12px;">
-                            📷 Problem photo registered with submission.
-                        </div>
-                        """,
+                        """<div style="background:#F1F5F9; border:1px dashed #CBD5E1; border-radius:8px; height:160px; display:flex; align-items:center; justify-content:center; text-align:center; color:#64748B; font-size:12px; padding:12px;">
+📷 Problem photo registered with submission.
+</div>""",
                         unsafe_allow_html=True
                     )

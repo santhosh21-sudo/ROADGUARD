@@ -257,18 +257,16 @@ def render_auth_gateway():
 
     with col_center:
         st.markdown(
-            f"""
-            <div class="rg-card" style="text-align:center; padding: 28px 30px; border-top: 5px solid {THEME_COLORS['primary_blue']};">
-                <div style="font-size: 42px; margin-bottom: 8px;">🛡️</div>
-                <h2 style="margin: 0; color: #1E3A8A; font-weight: 800; font-size: 26px;">Welcome to ROADGUARD</h2>
-                <p style="margin: 6px 0 0 0; color: #64748B; font-size: 14px;">
-                    Smart Road Hazard Reporting & Navigation System
-                </p>
-                <div style="margin-top: 14px; display: inline-flex; align-items: center; gap: 6px; background: #EFF6FF; border: 1px solid #BFDBFE; padding: 4px 12px; border-radius: 9999px; font-size: 12px; color: #1D4ED8; font-weight: 600;">
-                    🔒 Protected Platform • Supabase Authentication
-                </div>
-            </div>
-            """,
+            f"""<div class="rg-card" style="text-align:center; padding: 28px 30px; border-top: 5px solid {THEME_COLORS['primary_blue']};">
+<div style="font-size: 42px; margin-bottom: 8px;">🛡️</div>
+<h2 style="margin: 0; color: #1E3A8A; font-weight: 800; font-size: 26px;">Welcome to ROADGUARD</h2>
+<p style="margin: 6px 0 0 0; color: #64748B; font-size: 14px;">
+Smart Road Hazard Reporting & Navigation System
+</p>
+<div style="margin-top: 14px; display: inline-flex; align-items: center; gap: 6px; background: #EFF6FF; border: 1px solid #BFDBFE; padding: 4px 12px; border-radius: 9999px; font-size: 12px; color: #1D4ED8; font-weight: 600;">
+🔒 Protected Platform • Supabase Authentication
+</div>
+</div>""",
             unsafe_allow_html=True
         )
 
@@ -293,16 +291,14 @@ def render_auth_gateway():
 
             # College Presentation / Evaluator Quick Login Strip
             st.markdown(
-                """
-                <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:8px; padding:10px 14px; margin-bottom:14px;">
-                    <div style="font-weight:700; color:#1E40AF; font-size:12px; margin-bottom:6px;">
-                        ⚡ EVALUATOR QUICK SIGN-IN (FOR PRESENTATIONS):
-                    </div>
-                    <div style="font-size:11px; color:#475569; margin-bottom:8px;">
-                        Skip credential typing during testing or evaluation:
-                    </div>
-                </div>
-                """,
+                """<div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:8px; padding:10px 14px; margin-bottom:14px;">
+<div style="font-weight:700; color:#1E40AF; font-size:12px; margin-bottom:6px;">
+⚡ EVALUATOR QUICK SIGN-IN (FOR PRESENTATIONS):
+</div>
+<div style="font-size:11px; color:#475569; margin-bottom:8px;">
+Skip credential typing during testing or evaluation:
+</div>
+</div>""",
                 unsafe_allow_html=True
             )
             col_q1, col_q2 = st.columns(2)
@@ -444,15 +440,13 @@ def render_auth_gateway():
                 google_oauth_url = supabase_get_google_oauth_url()
 
                 st.markdown(
-                    f"""
-                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:18px; text-align:center; margin: 12px 0;">
-                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="36" style="margin-bottom:8px;" alt="Google"/>
-                        <div style="font-weight:700; color:#1E3A8A; font-size:16px;">Supabase Google OAuth</div>
-                        <p style="font-size:13px; color:#64748B; margin:4px 0 14px 0;">
-                            Secure single-click authentication. Redirects to Google consent and returns to ROADGUARD.
-                        </p>
-                    </div>
-                    """,
+                    f"""<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:18px; text-align:center; margin: 12px 0;">
+<img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="36" style="margin-bottom:8px;" alt="Google"/>
+<div style="font-weight:700; color:#1E40AF; font-size:16px;">Supabase Google OAuth</div>
+<p style="font-size:13px; color:#64748B; margin:4px 0 14px 0;">
+Secure single-click authentication. Redirects to Google consent and returns to ROADGUARD.
+</p>
+</div>""",
                     unsafe_allow_html=True
                 )
 
@@ -562,27 +556,25 @@ def render_auth_sidebar():
     email_display = user.get("email", "")
 
     st.sidebar.markdown(
-        f"""
-        <div class="user-profile-pill">
-            <div style="display:flex; align-items:center; justify-content:space-between;">
-                <div style="font-weight:700; font-size:15px; color:#1E3A8A;">
-                    {user.get('avatar_icon', '🚗')} {user['full_name']}
-                </div>
-            </div>
-            <div style="font-size:11px; color:#64748B; margin-top:2px; word-break:break-all;">
-                {email_display}
-            </div>
-            <div style="margin-top:6px; font-size:12px; color:#475569;">
-                <b>Role:</b> {role_meta['icon']} {role_meta['label']}
-            </div>
-            <div style="margin-top:2px; font-size:12px; color:#059669; font-weight:600;">
-                <b>Rank:</b> {user.get('badge', '🌱 Novice Scout')}
-            </div>
-            <div style="margin-top:2px; font-size:12px; color:#D97706; font-weight:600;">
-                <b>Safety Karma:</b> ⭐ {user.get('karma_points', 25)} pts
-            </div>
-        </div>
-        """,
+        f"""<div class="user-profile-pill">
+<div style="display:flex; align-items:center; justify-content:space-between;">
+<div style="font-weight:700; font-size:15px; color:#1E3A8A;">
+{user.get('avatar_icon', '🚗')} {user['full_name']}
+</div>
+</div>
+<div style="font-size:11px; color:#64748B; margin-top:2px; word-break:break-all;">
+{email_display}
+</div>
+<div style="margin-top:6px; font-size:12px; color:#475569;">
+<b>Role:</b> {role_meta['icon']} {role_meta['label']}
+</div>
+<div style="margin-top:2px; font-size:12px; color:#059669; font-weight:600;">
+<b>Rank:</b> {user.get('badge', '🌱 Novice Scout')}
+</div>
+<div style="margin-top:2px; font-size:12px; color:#D97706; font-weight:600;">
+<b>Safety Karma:</b> ⭐ {user.get('karma_points', 25)} pts
+</div>
+</div>""",
         unsafe_allow_html=True
     )
 

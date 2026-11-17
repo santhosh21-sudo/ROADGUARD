@@ -84,23 +84,21 @@ def render_route_planning_view():
     """
     # Header Banner
     st.markdown(
-        f"""
-        <div class="rg-card" style="border-left: 5px solid {THEME_COLORS['primary_blue']};">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-                <div>
-                    <h2 style="margin:0; color:#1E3A8A;">🧭 Smart Route Planning & Road Hazard Alerts</h2>
-                    <p style="margin:4px 0 0 0; color:#475569; font-size:14px;">
-                        Compute driving travel routes, scan for road hazards, receive targeted alerts, and distinguish verified reports before you depart.
-                    </p>
-                </div>
-                <div>
-                    <span class="rg-badge" style="background:#EFF6FF; color:#1E40AF; border:1px solid #BFDBFE; font-size:13px; padding:6px 14px;">
-                        🛰️ Live Highway Radar
-                    </span>
-                </div>
-            </div>
-        </div>
-        """,
+        f"""<div class="rg-card" style="border-left: 5px solid {THEME_COLORS['primary_blue']};">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+<div>
+<h2 style="margin:0; color:#1E3A8A;">🧭 Smart Route Planning & Road Hazard Alerts</h2>
+<p style="margin:4px 0 0 0; color:#475569; font-size:14px;">
+Compute driving travel routes, scan for road hazards, receive targeted alerts, and distinguish verified reports before you depart.
+</p>
+</div>
+<div>
+<span class="rg-badge" style="background:#EFF6FF; color:#1E40AF; border:1px solid #BFDBFE; font-size:13px; padding:6px 14px;">
+🛰️ Live Highway Radar
+</span>
+</div>
+</div>
+</div>""",
         unsafe_allow_html=True
     )
 
@@ -279,67 +277,62 @@ def render_route_planning_view():
     if total_hazards == 0:
         # Zero Reports: Show explicit disclaimer. DO NOT CLAIM ROAD IS SAFE!
         st.markdown(
-            f"""
-            <div class="rg-card" style="border-left: 5px solid {THEME_COLORS['primary_blue']}; background-color: #EFF6FF;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div>
-                        <span class="rg-badge" style="background:#DBEAFE; color:#1E40AF; font-size:12px; font-weight:700;">
-                            ℹ️ ZERO ACTIVE HAZARD REPORTS ON FILE
-                        </span>
-                        <h3 style="margin:8px 0 4px 0; color:#1E3A8A;">No Active Reports Logged on this Corridor</h3>
-                    </div>
-                    <div style="text-align:right;">
-                        <span style="font-size:24px; font-weight:800; color:#1E40AF;">0</span>
-                        <div style="font-size:11px; color:#475569;">Active Reports</div>
-                    </div>
-                </div>
-                <div style="margin-top:8px; font-size:13px; color:#1E3A8A; line-height:1.5;">
-                    {corridor_analysis['summary']}
-                </div>
-                <div style="margin-top:12px; padding:12px 14px; background:#FFFFFF; border:1px solid #BFDBFE; border-radius:8px; font-size:12px; color:#1E40AF;">
-                    <b>⚠️ CRITICAL SAFETY NOTICE:</b> The absence of active citizen or municipal reports does <b>NOT</b> guarantee that this road is safe, clear, or free of potholes.
-                    Road surfaces change dynamically due to traffic wear, rainfall, and sudden temperature shifts. 
-                    Unmonitored hazards may exist. Always maintain safe following distances, adhere to posted speed limits, and drive defensively.
-                </div>
-            </div>
-            """,
+            f"""<div class="rg-card" style="border-left: 5px solid {THEME_COLORS['primary_blue']}; background-color: #EFF6FF;">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<div>
+<span class="rg-badge" style="background:#DBEAFE; color:#1E40AF; font-size:12px; font-weight:700;">
+ℹ️ ZERO ACTIVE HAZARD REPORTS ON FILE
+</span>
+<h3 style="margin:8px 0 4px 0; color:#1E3A8A;">No Active Reports Logged on this Corridor</h3>
+</div>
+<div style="text-align:right;">
+<span style="font-size:24px; font-weight:800; color:#1E40AF;">0</span>
+<div style="font-size:11px; color:#475569;">Active Reports</div>
+</div>
+</div>
+<div style="margin-top:8px; font-size:13px; color:#1E3A8A; line-height:1.5;">
+{corridor_analysis['summary']}
+</div>
+<div style="margin-top:12px; padding:12px 14px; background:#FFFFFF; border:1px solid #BFDBFE; border-radius:8px; font-size:12px; color:#1E40AF;">
+<b>⚠️ CRITICAL SAFETY NOTICE:</b> The absence of active citizen or municipal reports does <b>NOT</b> guarantee that this road is safe, clear, or free of potholes.
+Road surfaces change dynamically due to traffic wear, rainfall, and sudden temperature shifts.
+Unmonitored hazards may exist. Always maintain safe following distances, adhere to posted speed limits, and drive defensively.
+</div>
+</div>""",
             unsafe_allow_html=True
         )
     else:
         # Hazards detected: Display Risk Score & Verification Breakdown
         risk_color = corridor_analysis["risk_color"]
         st.markdown(
-            f"""
-            <div class="rg-card" style="border: 2px solid {risk_color};">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-                    <div>
-                        <div style="font-size:12px; font-weight:700; color:#64748B; text-transform:uppercase;">CORRIDOR HAZARD ASSESSMENT</div>
-                        <div style="font-size:24px; font-weight:800; color:{risk_color};">{corridor_analysis['risk_grade']}</div>
-                    </div>
-                    <div style="text-align:right;">
-                        <div style="font-size:32px; font-weight:800; color:#0F172A;">
-                            {total_hazards}
-                            <span style="font-size:14px; color:#64748B;">Hazards Intercepted</span>
-                        </div>
-                        <div style="font-size:12px; color:#64748B;">
-                            Corridor Buffer: ±{int(corridor_buffer_m)}m
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-top:10px; font-size:13px; color:#334155; line-height:1.4;">
-                    <b>Corridor Status:</b> {corridor_analysis['summary']}
-                </div>
-                <!-- Verification Distinction Bar -->
-                <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-                    <span class="rg-badge" style="background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0; font-size:12px; padding:6px 12px;">
-                        🛡️ <b>{verified_count} Verified Hazard(s)</b> (Confirmed by DOT / Public Works)
-                    </span>
-                    <span class="rg-badge" style="background:#FEF3C7; color:#92400E; border:1px solid #FDE68A; font-size:12px; padding:6px 12px;">
-                        📝 <b>{unverified_count} Unverified Report(s)</b> (Citizen reported, pending field check)
-                    </span>
-                </div>
-            </div>
-            """,
+            f"""<div class="rg-card" style="border: 2px solid {risk_color};">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+<div>
+<div style="font-size:12px; font-weight:700; color:#64748B; text-transform:uppercase;">CORRIDOR HAZARD ASSESSMENT</div>
+<div style="font-size:24px; font-weight:800; color:{risk_color};">{corridor_analysis['risk_grade']}</div>
+</div>
+<div style="text-align:right;">
+<div style="font-size:32px; font-weight:800; color:#0F172A;">
+{total_hazards}
+<span style="font-size:14px; color:#64748B;">Hazards Intercepted</span>
+</div>
+<div style="font-size:12px; color:#64748B;">
+Corridor Buffer: ±{int(corridor_buffer_m)}m
+</div>
+</div>
+</div>
+<div style="margin-top:10px; font-size:13px; color:#334155; line-height:1.4;">
+<b>Corridor Status:</b> {corridor_analysis['summary']}
+</div>
+<div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+<span class="rg-badge" style="background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0; font-size:12px; padding:6px 12px;">
+🛡️ <b>{verified_count} Verified Hazard(s)</b> (Confirmed by DOT / Public Works)
+</span>
+<span class="rg-badge" style="background:#FEF3C7; color:#92400E; border:1px solid #FDE68A; font-size:12px; padding:6px 12px;">
+📝 <b>{unverified_count} Unverified Report(s)</b> (Citizen reported, pending field check)
+</span>
+</div>
+</div>""",
             unsafe_allow_html=True
         )
 
@@ -363,27 +356,23 @@ def render_route_planning_view():
         with col_w1:
             if potholes:
                 st.markdown(
-                    f"""
-                    <div style="background:#FFF1F2; border:1px solid #FECDD3; border-left:4px solid #DC2626; border-radius:8px; padding:12px; margin-bottom:10px;">
-                        <div style="font-weight:700; color:#9F1239; font-size:14px;">🕳️ Potholes Alert ({len(potholes)})</div>
-                        <div style="font-size:12px; color:#BE123C; margin-top:4px;">
-                            <b>Danger:</b> Sharp craters, rim deformation, or sudden wheel deflection.
-                        </div>
-                        <div style="font-size:11px; color:#881337; margin-top:6px;">
-                            <b>Advisory:</b> Reduce speed, maintain lane buffer, avoid sudden swerving.
-                        </div>
-                    </div>
-                    """,
+                    f"""<div style="background:#FFF1F2; border:1px solid #FECDD3; border-left:4px solid #DC2626; border-radius:8px; padding:12px; margin-bottom:10px;">
+<div style="font-weight:700; color:#9F1239; font-size:14px;">🕳️ Potholes Alert ({len(potholes)})</div>
+<div style="font-size:12px; color:#BE123C; margin-top:4px;">
+<b>Danger:</b> Sharp craters, rim deformation, or sudden wheel deflection.
+</div>
+<div style="font-size:11px; color:#881337; margin-top:6px;">
+<b>Advisory:</b> Reduce speed, maintain lane buffer, avoid sudden swerving.
+</div>
+</div>""",
                     unsafe_allow_html=True
                 )
             else:
                 st.markdown(
-                    """
-                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:10px; opacity:0.8;">
-                        <div style="font-weight:600; color:#475569; font-size:13px;">🕳️ Potholes: 0 Reported</div>
-                        <div style="font-size:11px; color:#64748B; margin-top:2px;">No logged potholes along scanned buffer.</div>
-                    </div>
-                    """,
+                    """<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:10px; opacity:0.8;">
+<div style="font-weight:600; color:#475569; font-size:13px;">🕳️ Potholes: 0 Reported</div>
+<div style="font-size:11px; color:#64748B; margin-top:2px;">No logged potholes along scanned buffer.</div>
+</div>""",
                     unsafe_allow_html=True
                 )
 
@@ -391,27 +380,23 @@ def render_route_planning_view():
         with col_w2:
             if construction:
                 st.markdown(
-                    f"""
-                    <div style="background:#FFF7ED; border:1px solid #FFEDD5; border-left:4px solid #EA580C; border-radius:8px; padding:12px; margin-bottom:10px;">
-                        <div style="font-weight:700; color:#9A3412; font-size:14px;">🚧 Road Construction ({len(construction)})</div>
-                        <div style="font-size:12px; color:#C2410C; margin-top:4px;">
-                            <b>Danger:</b> Lane narrowing, construction barricades, slow-moving heavy machinery.
-                        </div>
-                        <div style="font-size:11px; color:#7C2D12; margin-top:6px;">
-                            <b>Advisory:</b> Obey reduced construction speed limits; watch for flaggers.
-                        </div>
-                    </div>
-                    """,
+                    f"""<div style="background:#FFF7ED; border:1px solid #FFEDD5; border-left:4px solid #EA580C; border-radius:8px; padding:12px; margin-bottom:10px;">
+<div style="font-weight:700; color:#9A3412; font-size:14px;">🚧 Road Construction ({len(construction)})</div>
+<div style="font-size:12px; color:#C2410C; margin-top:4px;">
+<b>Danger:</b> Lane narrowing, construction barricades, slow-moving heavy machinery.
+</div>
+<div style="font-size:11px; color:#7C2D12; margin-top:6px;">
+<b>Advisory:</b> Obey reduced construction speed limits; watch for flaggers.
+</div>
+</div>""",
                     unsafe_allow_html=True
                 )
             else:
                 st.markdown(
-                    """
-                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:10px; opacity:0.8;">
-                        <div style="font-weight:600; color:#475569; font-size:13px;">🚧 Construction: 0 Reported</div>
-                        <div style="font-size:11px; color:#64748B; margin-top:2px;">No active work zones detected.</div>
-                    </div>
-                    """,
+                    """<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:10px; opacity:0.8;">
+<div style="font-weight:600; color:#475569; font-size:13px;">🚧 Construction: 0 Reported</div>
+<div style="font-size:11px; color:#64748B; margin-top:2px;">No active work zones detected.</div>
+</div>""",
                     unsafe_allow_html=True
                 )
 
@@ -419,27 +404,23 @@ def render_route_planning_view():
         with col_w3:
             if waterlogging:
                 st.markdown(
-                    f"""
-                    <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-left:4px solid #2563EB; border-radius:8px; padding:12px; margin-bottom:10px;">
-                        <div style="font-weight:700; color:#1E40AF; font-size:14px;">🌊 Waterlogging Alert ({len(waterlogging)})</div>
-                        <div style="font-size:12px; color:#1D4ED8; margin-top:4px;">
-                            <b>Danger:</b> Submerged pavement, deep puddles, severe hydroplaning hazard.
-                        </div>
-                        <div style="font-size:11px; color:#1E3A8A; margin-top:6px;">
-                            <b>Advisory:</b> Turn Around, Don't Drown! Do not drive into standing flood pools.
-                        </div>
-                    </div>
-                    """,
+                    f"""<div style="background:#EFF6FF; border:1px solid #BFDBFE; border-left:4px solid #2563EB; border-radius:8px; padding:12px; margin-bottom:10px;">
+<div style="font-weight:700; color:#1E40AF; font-size:14px;">🌊 Waterlogging Alert ({len(waterlogging)})</div>
+<div style="font-size:12px; color:#1D4ED8; margin-top:4px;">
+<b>Danger:</b> Submerged pavement, deep puddles, severe hydroplaning hazard.
+</div>
+<div style="font-size:11px; color:#1E3A8A; margin-top:6px;">
+<b>Advisory:</b> Turn Around, Don't Drown! Do not drive into standing flood pools.
+</div>
+</div>""",
                     unsafe_allow_html=True
                 )
             else:
                 st.markdown(
-                    """
-                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:10px; opacity:0.8;">
-                        <div style="font-weight:600; color:#475569; font-size:13px;">🌊 Waterlogging: 0 Reported</div>
-                        <div style="font-size:11px; color:#64748B; margin-top:2px;">No water stagnation reports along corridor.</div>
-                    </div>
-                    """,
+                    """<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:10px; opacity:0.8;">
+<div style="font-weight:600; color:#475569; font-size:13px;">🌊 Waterlogging: 0 Reported</div>
+<div style="font-size:11px; color:#64748B; margin-top:2px;">No water stagnation reports along corridor.</div>
+</div>""",
                     unsafe_allow_html=True
                 )
 
@@ -450,27 +431,23 @@ def render_route_planning_view():
         with col_w4:
             if rain_damage:
                 st.markdown(
-                    f"""
-                    <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-left:4px solid #16A34A; border-radius:8px; padding:12px; margin-bottom:10px;">
-                        <div style="font-weight:700; color:#166534; font-size:14px;">🌧️ Rain Damage ({len(rain_damage)})</div>
-                        <div style="font-size:12px; color:#15803D; margin-top:4px;">
-                            <b>Danger:</b> Mud washout, gravel spill on pavement, soft shoulder collapse.
-                        </div>
-                        <div style="font-size:11px; color:#14532D; margin-top:6px;">
-                            <b>Advisory:</b> Reduced tire grip; increase braking distance.
-                        </div>
-                    </div>
-                    """,
+                    f"""<div style="background:#F0FDF4; border:1px solid #BBF7D0; border-left:4px solid #16A34A; border-radius:8px; padding:12px; margin-bottom:10px;">
+<div style="font-weight:700; color:#166534; font-size:14px;">🌧️ Rain Damage ({len(rain_damage)})</div>
+<div style="font-size:12px; color:#15803D; margin-top:4px;">
+<b>Danger:</b> Mud washout, gravel spill on pavement, soft shoulder collapse.
+</div>
+<div style="font-size:11px; color:#14532D; margin-top:6px;">
+<b>Advisory:</b> Reduced tire grip; increase braking distance.
+</div>
+</div>""",
                     unsafe_allow_html=True
                 )
             else:
                 st.markdown(
-                    """
-                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:10px; opacity:0.8;">
-                        <div style="font-weight:600; color:#475569; font-size:13px;">🌧️ Rain Damage: 0 Reported</div>
-                        <div style="font-size:11px; color:#64748B; margin-top:2px;">No storm washouts or erosion logged.</div>
-                    </div>
-                    """,
+                    """<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:10px; opacity:0.8;">
+<div style="font-weight:600; color:#475569; font-size:13px;">🌧️ Rain Damage: 0 Reported</div>
+<div style="font-size:11px; color:#64748B; margin-top:2px;">No storm washouts or erosion logged.</div>
+</div>""",
                     unsafe_allow_html=True
                 )
 
@@ -478,27 +455,23 @@ def render_route_planning_view():
         with col_w5:
             if repair:
                 st.markdown(
-                    f"""
-                    <div style="background:#FAF5FF; border:1px solid #E9D5FF; border-left:4px solid #9333EA; border-radius:8px; padding:12px; margin-bottom:10px;">
-                        <div style="font-weight:700; color:#6B21A8; font-size:14px;">🔧 Road Repair ({len(repair)})</div>
-                        <div style="font-size:12px; color:#7E22CE; margin-top:4px;">
-                            <b>Danger:</b> Fresh asphalt patching, uneven surface grading, lane deflection.
-                        </div>
-                        <div style="font-size:11px; color:#581C87; margin-top:6px;">
-                            <b>Advisory:</b> Watch for road workers and loose chipping stones.
-                        </div>
-                    </div>
-                    """,
+                    f"""<div style="background:#FAF5FF; border:1px solid #E9D5FF; border-left:4px solid #9333EA; border-radius:8px; padding:12px; margin-bottom:10px;">
+<div style="font-weight:700; color:#6B21A8; font-size:14px;">🔧 Road Repair ({len(repair)})</div>
+<div style="font-size:12px; color:#7E22CE; margin-top:4px;">
+<b>Danger:</b> Fresh asphalt patching, uneven surface grading, lane deflection.
+</div>
+<div style="font-size:11px; color:#581C87; margin-top:6px;">
+<b>Advisory:</b> Watch for road workers and loose chipping stones.
+</div>
+</div>""",
                     unsafe_allow_html=True
                 )
             else:
                 st.markdown(
-                    """
-                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:10px; opacity:0.8;">
-                        <div style="font-weight:600; color:#475569; font-size:13px;">🔧 Road Repair: 0 Reported</div>
-                        <div style="font-size:11px; color:#64748B; margin-top:2px;">No active resurfacing crews on route.</div>
-                    </div>
-                    """,
+                    """<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:10px; opacity:0.8;">
+<div style="font-weight:600; color:#475569; font-size:13px;">🔧 Road Repair: 0 Reported</div>
+<div style="font-size:11px; color:#64748B; margin-top:2px;">No active resurfacing crews on route.</div>
+</div>""",
                     unsafe_allow_html=True
                 )
 
@@ -506,27 +479,23 @@ def render_route_planning_view():
         with col_w6:
             if accidents:
                 st.markdown(
-                    f"""
-                    <div style="background:#FEF2F2; border:1px solid #FCA5A5; border-left:4px solid #B91C1C; border-radius:8px; padding:12px; margin-bottom:10px;">
-                        <div style="font-weight:700; color:#991B1B; font-size:14px;">💥 Accidents & Blockages ({len(accidents)})</div>
-                        <div style="font-size:12px; color:#B91C1C; margin-top:4px;">
-                            <b>Danger:</b> Vehicle crash, fuel spill, or full lane blockage.
-                        </div>
-                        <div style="font-size:11px; color:#7F1D1D; margin-top:6px;">
-                            <b>Advisory:</b> Yield to emergency responders; take detour if possible.
-                        </div>
-                    </div>
-                    """,
+                    f"""<div style="background:#FEF2F2; border:1px solid #FCA5A5; border-left:4px solid #B91C1C; border-radius:8px; padding:12px; margin-bottom:10px;">
+<div style="font-weight:700; color:#991B1B; font-size:14px;">💥 Accidents & Blockages ({len(accidents)})</div>
+<div style="font-size:12px; color:#B91C1C; margin-top:4px;">
+<b>Danger:</b> Vehicle crash, fuel spill, or full lane blockage.
+</div>
+<div style="font-size:11px; color:#7F1D1D; margin-top:6px;">
+<b>Advisory:</b> Yield to emergency responders; take detour if possible.
+</div>
+</div>""",
                     unsafe_allow_html=True
                 )
             else:
                 st.markdown(
-                    """
-                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:10px; opacity:0.8;">
-                        <div style="font-weight:600; color:#475569; font-size:13px;">💥 Accidents: 0 Reported</div>
-                        <div style="font-size:11px; color:#64748B; margin-top:2px;">No traffic collisions reported along corridor.</div>
-                    </div>
-                    """,
+                    """<div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:10px; opacity:0.8;">
+<div style="font-weight:600; color:#475569; font-size:13px;">💥 Accidents: 0 Reported</div>
+<div style="font-size:11px; color:#64748B; margin-top:2px;">No traffic collisions reported along corridor.</div>
+</div>""",
                     unsafe_allow_html=True
                 )
 
@@ -673,38 +642,36 @@ def render_hazard_corridor_card(h: Dict[str, Any], is_verified: bool):
 
     with col_details:
         st.markdown(
-            f"""
-            <div class="rg-card" style="border-left: 5px solid {sev_color}; margin-bottom:12px;">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-                    <div>
-                        <span class="rg-badge" style="background:{badge_bg}; color:{badge_txt}; border:1px solid {badge_border}; font-weight:700;">
-                            {badge_label}
-                        </span>
-                        <span class="rg-badge badge-{sev.lower()}" style="margin-left:6px;">
-                            {sev.upper()} SEVERITY
-                        </span>
-                    </div>
-                    <span style="font-size:12px; font-weight:700; color:#1E40AF;">
-                        📍 {dist_m}m from driving path
-                    </span>
-                </div>
-                <h4 style="margin:10px 0 4px 0; color:#0F172A;">{h['title']}</h4>
-                <div style="font-size:12px; color:#475569; margin-bottom:6px;">
-                    📍 {h.get('address', 'Unknown location')} | GPS: <code>{h['latitude']:.4f}, {h['longitude']:.4f}</code>
-                </div>
-                <div style="background:#F8FAFC; padding:8px 12px; border-radius:6px; font-size:13px; color:#334155; margin-bottom:6px;">
-                    {h.get('description', 'No detailed description provided.')}
-                </div>
-                <div style="background:#ECFDF5; border:1px solid #A7F3D0; padding:6px 10px; border-radius:6px; font-size:12px; color:#065F46;">
-                    <b>💡 Driver Advisory:</b> {h.get('suggested_action', 'Proceed cautiously.')}
-                </div>
-                {f"<div style='background:#EFF6FF; border:1px solid #BFDBFE; padding:6px 10px; border-radius:6px; font-size:12px; color:#1E40AF; margin-top:6px;'><b>Public Works Note:</b> {h['resolution_notes']}</div>" if h.get('resolution_notes') else ""}
-                <div style="font-size:11px; color:#64748B; margin-top:8px; display:flex; justify-content:space-between;">
-                    <span>Reported by: <b>{h.get('reporter_name', 'Citizen')}</b> ({time_ago(h.get('created_at', ''))})</span>
-                    <span>👍 {h.get('upvotes', 0)} Community Confirmations</span>
-                </div>
-            </div>
-            """,
+            f"""<div class="rg-card" style="border-left: 5px solid {sev_color}; margin-bottom:12px;">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+<div>
+<span class="rg-badge" style="background:{badge_bg}; color:{badge_txt}; border:1px solid {badge_border}; font-weight:700;">
+{badge_label}
+</span>
+<span class="rg-badge badge-{sev.lower()}" style="margin-left:6px;">
+{sev.upper()} SEVERITY
+</span>
+</div>
+<span style="font-size:12px; font-weight:700; color:#1E40AF;">
+📍 {dist_m}m from driving path
+</span>
+</div>
+<h4 style="margin:10px 0 4px 0; color:#0F172A;">{h['title']}</h4>
+<div style="font-size:12px; color:#475569; margin-bottom:6px;">
+📍 {h.get('address', 'Unknown location')} | GPS: <code>{h['latitude']:.4f}, {h['longitude']:.4f}</code>
+</div>
+<div style="background:#F8FAFC; padding:8px 12px; border-radius:6px; font-size:13px; color:#334155; margin-bottom:6px;">
+{h.get('description', 'No detailed description provided.')}
+</div>
+<div style="background:#ECFDF5; border:1px solid #A7F3D0; padding:6px 10px; border-radius:6px; font-size:12px; color:#065F46;">
+<b>💡 Driver Advisory:</b> {h.get('suggested_action', 'Proceed cautiously.')}
+</div>
+{f"<div style='background:#EFF6FF; border:1px solid #BFDBFE; padding:6px 10px; border-radius:6px; font-size:12px; color:#1E40AF; margin-top:6px;'><b>Public Works Note:</b> {h['resolution_notes']}</div>" if h.get('resolution_notes') else ""}
+<div style="font-size:11px; color:#64748B; margin-top:8px; display:flex; justify-content:space-between;">
+<span>Reported by: <b>{h.get('reporter_name', 'Citizen')}</b> ({time_ago(h.get('created_at', ''))})</span>
+<span>👍 {h.get('upvotes', 0)} Community Confirmations</span>
+</div>
+</div>""",
             unsafe_allow_html=True
         )
 
@@ -714,10 +681,8 @@ def render_hazard_corridor_card(h: Dict[str, Any], is_verified: bool):
             st.image(photo_url, caption=f"Report Photo: #{h['id']} {h['title'][:25]}", use_container_width=True)
         else:
             st.markdown(
-                f"""
-                <div style="background:#F1F5F9; border:1px dashed #CBD5E1; border-radius:8px; height:160px; display:flex; align-items:center; justify-content:center; text-align:center; color:#64748B; font-size:12px; padding:12px;">
-                    📷 Photo verification {('confirmed by field team' if is_verified else 'pending reporter photo upload')}.
-                </div>
-                """,
+                f"""<div style="background:#F1F5F9; border:1px dashed #CBD5E1; border-radius:8px; height:160px; display:flex; align-items:center; justify-content:center; text-align:center; color:#64748B; font-size:12px; padding:12px;">
+📷 Photo verification {('confirmed by field team' if is_verified else 'pending reporter photo upload')}.
+</div>""",
                 unsafe_allow_html=True
             )

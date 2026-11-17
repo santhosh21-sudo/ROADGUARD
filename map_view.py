@@ -108,23 +108,21 @@ def render_map_page():
     user = get_current_user()
 
     st.markdown(
-        f"""
-        <div class="rg-card" style="border-left: 5px solid {THEME_COLORS['accent_green']};">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-                <div>
-                    <h2 style="margin:0; color:#1E3A8A;">🗺️ Interactive Road Hazard Map & Radar</h2>
-                    <p style="margin:4px 0 0 0; color:#475569;">
-                        Real-time geospatial intelligence. Click markers to view hazard descriptions, photos, and live community verifications.
-                    </p>
-                </div>
-                <div>
-                    <span class="rg-badge" style="background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0; font-size:12px; padding:4px 12px;">
-                        🌐 Permanent Supabase Database
-                    </span>
-                </div>
-            </div>
-        </div>
-        """,
+        f"""<div class="rg-card" style="border-left: 5px solid {THEME_COLORS['accent_green']};">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+<div>
+<h2 style="margin:0; color:#1E3A8A;">🗺️ Interactive Road Hazard Map & Radar</h2>
+<p style="margin:4px 0 0 0; color:#475569;">
+Real-time geospatial intelligence. Click markers to view hazard descriptions, photos, and live community verifications.
+</p>
+</div>
+<div>
+<span class="rg-badge" style="background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0; font-size:12px; padding:4px 12px;">
+🌐 Permanent Supabase Database
+</span>
+</div>
+</div>
+</div>""",
         unsafe_allow_html=True
     )
 
@@ -498,18 +496,16 @@ def render_hazard_inspector(
                 dist_text = f"{nh['dist_m']}m" if nh["dist_m"] < 1000 else f"{nh['dist_km']} km"
 
                 st.markdown(
-                    f"""
-                    <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-left:4px solid {sev_color}; border-radius:8px; padding:10px; margin-bottom:8px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <span style="font-weight:700; color:#1E3A8A; font-size:13px;">{marker_meta['emoji']} {nh['title'][:32]}...</span>
-                            <span style="font-weight:800; background:#EFF6FF; color:#1D4ED8; padding:2px 6px; border-radius:4px; font-size:11px;">
-                                📍 {dist_text} away
-                            </span>
-                        </div>
-                        <div style="font-size:11px; color:#64748B; margin-top:2px;">📍 {nh.get('address', '')}</div>
-                        <div style="font-size:11px; color:#065F46; margin-top:4px;"><b>Advisory:</b> {nh.get('suggested_action', 'Caution required.')}</div>
-                    </div>
-                    """,
+                    f"""<div style="background:#FFFFFF; border:1px solid #E2E8F0; border-left:4px solid {sev_color}; border-radius:8px; padding:10px; margin-bottom:8px;">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<span style="font-weight:700; color:#1E3A8A; font-size:13px;">{marker_meta['emoji']} {nh['title'][:32]}...</span>
+<span style="font-weight:800; background:#EFF6FF; color:#1D4ED8; padding:2px 6px; border-radius:4px; font-size:11px;">
+📍 {dist_text} away
+</span>
+</div>
+<div style="font-size:11px; color:#64748B; margin-top:2px;">📍 {nh.get('address', '')}</div>
+<div style="font-size:11px; color:#065F46; margin-top:4px;"><b>Advisory:</b> {nh.get('suggested_action', 'Caution required.')}</div>
+</div>""",
                     unsafe_allow_html=True
                 )
         st.markdown("---")
@@ -543,32 +539,30 @@ def render_hazard_inspector(
 
     # Detailed card
     st.markdown(
-        f"""
-        <div class="rg-card" style="border-top: 4px solid {sev_info.get('color', '#2563EB')};">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span class="rg-badge" style="background:{marker_meta['badge_bg']}; color:{marker_meta['badge_color']}; font-weight:700;">
-                    {marker_meta['emoji']} {prob_type.upper()} ({sev.upper()})
-                </span>
-                <span class="rg-badge" style="background:{status_meta['color']}22; color:{status_meta['color']}; border:1px solid {status_meta['color']};">
-                    {status_meta['icon']} {h['status']}
-                </span>
-            </div>
-            <h3 style="margin:10px 0 6px 0; font-size:16px; color:#0F172A;">{h['title']}</h3>
-            <p style="margin:0 0 8px 0; font-size:12px; color:#475569;">
-                📍 <b>{h.get('address', 'Location')}</b> ({h.get('city', '')})<br>
-                🌐 GPS: <code>{h['latitude']:.4f}, {h['longitude']:.4f}</code>
-            </p>
-            <div style="background:#F8FAFC; border-radius:6px; padding:8px 10px; margin-bottom:8px; font-size:12px; color:#334155;">
-                {h.get('description', '')}
-            </div>
-            {f"<div style='background:#ECFDF5; border:1px solid #A7F3D0; padding:6px 8px; border-radius:6px; font-size:11px; color:#065F46; margin-bottom:6px;'><b>💡 Recommended Action:</b> {h['suggested_action']}</div>" if h.get('suggested_action') else ""}
-            {f"<div style='background:#EFF6FF; border:1px solid #BFDBFE; padding:6px 8px; border-radius:6px; font-size:11px; color:#1E40AF; margin-bottom:6px;'><b>Resolution Notes:</b> {h['resolution_notes']}</div>" if h.get('resolution_notes') else ""}
-            <div style="font-size:11px; color:#64748B; border-top:1px solid #E2E8F0; padding-top:6px; display:flex; justify-content:space-between;">
-                <span>Reported by: <b>{h.get('reporter_name', 'Citizen')}</b></span>
-                <span>🕒 {time_ago(h.get('created_at', ''))}</span>
-            </div>
-        </div>
-        """,
+        f"""<div class="rg-card" style="border-top: 4px solid {sev_info.get('color', '#2563EB')};">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<span class="rg-badge" style="background:{marker_meta['badge_bg']}; color:{marker_meta['badge_color']}; font-weight:700;">
+{marker_meta['emoji']} {prob_type.upper()} ({sev.upper()})
+</span>
+<span class="rg-badge" style="background:{status_meta['color']}22; color:{status_meta['color']}; border:1px solid {status_meta['color']};">
+{status_meta['icon']} {h['status']}
+</span>
+</div>
+<h3 style="margin:10px 0 6px 0; font-size:16px; color:#0F172A;">{h['title']}</h3>
+<p style="margin:0 0 8px 0; font-size:12px; color:#475569;">
+📍 <b>{h.get('address', 'Location')}</b> ({h.get('city', '')})<br>
+🌐 GPS: <code>{h['latitude']:.4f}, {h['longitude']:.4f}</code>
+</p>
+<div style="background:#F8FAFC; border-radius:6px; padding:8px 10px; margin-bottom:8px; font-size:12px; color:#334155;">
+{h.get('description', '')}
+</div>
+{f"<div style='background:#ECFDF5; border:1px solid #A7F3D0; padding:6px 8px; border-radius:6px; font-size:11px; color:#065F46; margin-bottom:6px;'><b>💡 Recommended Action:</b> {h['suggested_action']}</div>" if h.get('suggested_action') else ""}
+{f"<div style='background:#EFF6FF; border:1px solid #BFDBFE; padding:6px 8px; border-radius:6px; font-size:11px; color:#1E40AF; margin-bottom:6px;'><b>Resolution Notes:</b> {h['resolution_notes']}</div>" if h.get('resolution_notes') else ""}
+<div style="font-size:11px; color:#64748B; border-top:1px solid #E2E8F0; padding-top:6px; display:flex; justify-content:space-between;">
+<span>Reported by: <b>{h.get('reporter_name', 'Citizen')}</b></span>
+<span>🕒 {time_ago(h.get('created_at', ''))}</span>
+</div>
+</div>""",
         unsafe_allow_html=True
     )
 

@@ -64,23 +64,21 @@ def render_viewer_dashboard():
 
     # Header Banner
     st.markdown(
-        f"""
-        <div class="rg-card" style="border-left: 5px solid {THEME_COLORS['accent_green']};">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-                <div>
-                    <h2 style="margin:0; color:#1E3A8A;">👀 Viewer Dashboard & Travel Safety Inspector</h2>
-                    <p style="margin:4px 0 0 0; color:#475569;">
-                        Inspect approved road reports, search locations, and check reported road conditions before travelling.
-                    </p>
-                </div>
-                <div>
-                    <span class="rg-badge" style="background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0; font-size:13px; padding:6px 14px;">
-                        👀 ROLE: VIEWER ({user.get('full_name', 'Commuter')})
-                    </span>
-                </div>
-            </div>
-        </div>
-        """,
+        f"""<div class="rg-card" style="border-left: 5px solid {THEME_COLORS['accent_green']};">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+<div>
+<h2 style="margin:0; color:#1E3A8A;">👀 Viewer Dashboard & Travel Safety Inspector</h2>
+<p style="margin:4px 0 0 0; color:#475569;">
+Inspect approved road reports, search locations, and check reported road conditions before travelling.
+</p>
+</div>
+<div>
+<span class="rg-badge" style="background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0; font-size:13px; padding:6px 14px;">
+👀 ROLE: VIEWER ({user.get('full_name', 'Commuter')})
+</span>
+</div>
+</div>
+</div>""",
         unsafe_allow_html=True
     )
 
@@ -151,35 +149,33 @@ def render_location_search_explorer():
 
             with col_l:
                 st.markdown(
-                    f"""
-                    <div class="rg-card" style="border-left: 5px solid {sev_color};">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div>
-                                <span class="rg-badge badge-{sev.lower()}">{cat_meta['icon']} {sev.upper()}</span>
-                                <span class="rg-badge" style="background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">
-                                    {status_meta['icon']} {h['status']}
-                                </span>
-                            </div>
-                            <span style="font-size:11px; color:#64748B;">{time_ago(h.get('created_at', ''))}</span>
-                        </div>
-                        <h3 style="margin:10px 0 6px 0; color:#0F172A; font-size:17px;">{h['title']}</h3>
-                        <div style="font-size:13px; color:#475569; margin-bottom:8px;">
-                            📍 <b>{h.get('address', 'Location')}</b> ({h.get('city', '')})<br>
-                            🌐 GPS: <code>{h['latitude']:.4f}, {h['longitude']:.4f}</code>
-                        </div>
-                        <div style="background:#F8FAFC; border-radius:6px; padding:10px; margin-bottom:8px; font-size:13px; color:#334155;">
-                            {h.get('description', '')}
-                        </div>
-                        <div style="background:#ECFDF5; border:1px solid #A7F3D0; padding:6px 10px; border-radius:6px; font-size:12px; color:#065F46; margin-bottom:6px;">
-                            <b>💡 Recommended Action:</b> {h.get('suggested_action', 'Proceed with caution.')}
-                        </div>
-                        {f"<div style='background:#EFF6FF; border:1px solid #BFDBFE; padding:6px 10px; border-radius:6px; font-size:12px; color:#1E40AF; margin-bottom:6px;'><b>Public Works Note:</b> {h['resolution_notes']}</div>" if h.get('resolution_notes') else ""}
-                        <div style="font-size:11px; color:#64748B; display:flex; justify-content:space-between; margin-top:6px;">
-                            <span>Reported by: <b>{h.get('reporter_name', 'Citizen')}</b></span>
-                            <span>👍 {h['upvotes']} Community Verifications</span>
-                        </div>
-                    </div>
-                    """,
+                    f"""<div class="rg-card" style="border-left: 5px solid {sev_color};">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<div>
+<span class="rg-badge badge-{sev.lower()}">{cat_meta['icon']} {sev.upper()}</span>
+<span class="rg-badge" style="background:#ECFDF5; color:#065F46; border:1px solid #A7F3D0;">
+{status_meta['icon']} {h['status']}
+</span>
+</div>
+<span style="font-size:11px; color:#64748B;">{time_ago(h.get('created_at', ''))}</span>
+</div>
+<h3 style="margin:10px 0 6px 0; color:#0F172A; font-size:17px;">{h['title']}</h3>
+<div style="font-size:13px; color:#475569; margin-bottom:8px;">
+📍 <b>{h.get('address', 'Location')}</b> ({h.get('city', '')})<br>
+🌐 GPS: <code>{h['latitude']:.4f}, {h['longitude']:.4f}</code>
+</div>
+<div style="background:#F8FAFC; border-radius:6px; padding:10px; margin-bottom:8px; font-size:13px; color:#334155;">
+{h.get('description', '')}
+</div>
+<div style="background:#ECFDF5; border:1px solid #A7F3D0; padding:6px 10px; border-radius:6px; font-size:12px; color:#065F46; margin-bottom:6px;">
+<b>💡 Recommended Action:</b> {h.get('suggested_action', 'Proceed with caution.')}
+</div>
+{f"<div style='background:#EFF6FF; border:1px solid #BFDBFE; padding:6px 10px; border-radius:6px; font-size:12px; color:#1E40AF; margin-bottom:6px;'><b>Public Works Note:</b> {h['resolution_notes']}</div>" if h.get('resolution_notes') else ""}
+<div style="font-size:11px; color:#64748B; display:flex; justify-content:space-between; margin-top:6px;">
+<span>Reported by: <b>{h.get('reporter_name', 'Citizen')}</b></span>
+<span>👍 {h['upvotes']} Community Verifications</span>
+</div>
+</div>""",
                     unsafe_allow_html=True
                 )
 
@@ -189,10 +185,8 @@ def render_location_search_explorer():
                     st.image(photo_url, caption=f"Evidence Photo: {h['title'][:30]}...", use_container_width=True)
                 else:
                     st.markdown(
-                        """
-                        <div style="background:#F1F5F9; border:1px dashed #CBD5E1; border-radius:8px; height:180px; display:flex; align-items:center; justify-content:center; text-align:center; color:#64748B; font-size:12px; padding:14px;">
-                            📷 Official verification confirmed by community report.
-                        </div>
-                        """,
+                        """<div style="background:#F1F5F9; border:1px dashed #CBD5E1; border-radius:8px; height:180px; display:flex; align-items:center; justify-content:center; text-align:center; color:#64748B; font-size:12px; padding:14px;">
+📷 Official verification confirmed by community report.
+</div>""",
                         unsafe_allow_html=True
                     )
