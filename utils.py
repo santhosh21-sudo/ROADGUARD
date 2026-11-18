@@ -225,7 +225,7 @@ def apply_custom_theme():
     Injects custom CSS adhering strictly to the requested light theme:
     Modern, professional palette with blue, white, and green.
     """
-custom_css = f"""
+    custom_css = f"""
 <style>
 /* Google Fonts Import */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
